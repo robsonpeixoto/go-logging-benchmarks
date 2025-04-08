@@ -8,7 +8,7 @@ import (
 // BenchmarkEvent tests the performance of logging a simple message with no
 // contextual fields.
 func BenchmarkEvent(b *testing.B) {
-	b.Logf("Log a simple message without any contexual fields")
+	b.Logf("Log a simple message without any contextual fields")
 
 	for _, v := range loggers {
 		b.Run(v.name(), func(b *testing.B) {
@@ -238,8 +238,6 @@ func BenchmarkDisabledAccumulatedCtx(b *testing.B) {
 	for _, v := range loggers {
 		b.Run(v.name(), func(b *testing.B) {
 			l := v.newWithCtx(io.Discard)
-
-			b.ResetTimer()
 
 			b.RunParallel(func(pb *testing.PB) {
 				for pb.Next() {

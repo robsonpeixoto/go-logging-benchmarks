@@ -96,16 +96,9 @@ var (
 )
 
 var loggers = []logBenchmark{
-	&zerologBench{},
-	&phusLogBench{},
 	&zapBench{},
-	&zapSugarBench{},
 	&slogBench{},
 	&slogZapBench{},
-	&apexBench{},
-	&logrusBench{},
-	&log15Bench{},
-	&logfBench{},
 }
 
 type blackhole struct {
