@@ -15,13 +15,9 @@ func BenchmarkEvent(b *testing.B) {
 			out := &blackhole{}
 			l := v.new(out)
 
-			b.ResetTimer()
-
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					l.logEvent(logMsg)
-				}
-			})
+			for b.Loop() {
+				l.logEvent(logMsg)
+			}
 
 			if out.WriteCount() != uint64(b.N) {
 				b.Fatalf(
@@ -43,13 +39,9 @@ func BenchmarkDisabled(b *testing.B) {
 		b.Run(v.name(), func(b *testing.B) {
 			l := v.new(io.Discard)
 
-			b.ResetTimer()
-
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					l.logDisabled(logMsg)
-				}
-			})
+			for b.Loop() {
+				l.logDisabled(logMsg)
+			}
 		})
 	}
 }
@@ -64,13 +56,9 @@ func BenchmarkEventFmt(b *testing.B) {
 			out := &blackhole{}
 			l := v.new(out)
 
-			b.ResetTimer()
-
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					l.logEventFmt(logMsgFmt, logMsgArgs...)
-				}
-			})
+			for b.Loop() {
+				l.logEventFmt(logMsgFmt, logMsgArgs...)
+			}
 
 			if out.WriteCount() != uint64(b.N) {
 				b.Fatalf(
@@ -92,13 +80,9 @@ func BenchmarkDisabledFmt(b *testing.B) {
 		b.Run(v.name(), func(b *testing.B) {
 			l := v.new(io.Discard)
 
-			b.ResetTimer()
-
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					l.logDisabledFmt(logMsgFmt, logMsgArgs...)
-				}
-			})
+			for b.Loop() {
+				l.logDisabledFmt(logMsgFmt, logMsgArgs...)
+			}
 		})
 	}
 }
@@ -113,13 +97,9 @@ func BenchmarkEventCtx(b *testing.B) {
 			out := &blackhole{}
 			l := v.new(out)
 
-			b.ResetTimer()
-
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					l.logEventCtx(logMsg)
-				}
-			})
+			for b.Loop() {
+				l.logEventCtx(logMsg)
+			}
 
 			if out.WriteCount() != uint64(b.N) {
 				b.Fatalf(
@@ -141,13 +121,9 @@ func BenchmarkDisabledCtx(b *testing.B) {
 		b.Run(v.name(), func(b *testing.B) {
 			l := v.new(io.Discard)
 
-			b.ResetTimer()
-
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					l.logDisabledCtx(logMsg)
-				}
-			})
+			for b.Loop() {
+				l.logDisabledCtx(logMsg)
+			}
 		})
 	}
 }
@@ -162,13 +138,9 @@ func BenchmarkEventCtxWeak(b *testing.B) {
 			out := &blackhole{}
 			l := v.newWithCtx(out)
 
-			b.ResetTimer()
-
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					l.logEventCtxWeak(logMsg)
-				}
-			})
+			for b.Loop() {
+				l.logEventCtxWeak(logMsg)
+			}
 
 			if out.WriteCount() != uint64(b.N) {
 				b.Fatalf(
@@ -190,13 +162,9 @@ func BenchmarkDisabledCtxWeak(b *testing.B) {
 		b.Run(v.name(), func(b *testing.B) {
 			l := v.newWithCtx(io.Discard)
 
-			b.ResetTimer()
-
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					l.logDisabledCtxWeak(logMsg)
-				}
-			})
+			for b.Loop() {
+				l.logDisabledCtxWeak(logMsg)
+			}
 		})
 	}
 }
@@ -211,13 +179,9 @@ func BenchmarkEventAccumulatedCtx(b *testing.B) {
 			out := &blackhole{}
 			l := v.newWithCtx(out)
 
-			b.ResetTimer()
-
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					l.logEvent(logMsg)
-				}
-			})
+			for b.Loop() {
+				l.logEvent(logMsg)
+			}
 
 			if out.WriteCount() != uint64(b.N) {
 				b.Fatalf(
@@ -239,11 +203,9 @@ func BenchmarkDisabledAccumulatedCtx(b *testing.B) {
 		b.Run(v.name(), func(b *testing.B) {
 			l := v.newWithCtx(io.Discard)
 
-			b.RunParallel(func(pb *testing.PB) {
-				for pb.Next() {
-					l.logDisabled(logMsg)
-				}
-			})
+			for b.Loop() {
+				l.logDisabled(logMsg)
+			}
 		})
 	}
 }
